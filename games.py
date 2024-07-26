@@ -18,3 +18,37 @@ def win(bo, le):
             (bo[2] == le and bo[5] == le and bo[8] == le) or
             (bo[0] == le and bo[4] == le and bo[8] == le) or
             (bo[2] == le and bo[4] == le and bo[6] == le))
+
+# Main game loop
+def play_game():
+    turn = 'X'  # X starts the game
+    count = 0
+
+    for _ in range(9):  # Maximum 9 moves in a game  
+        print_board()
+        print(f"It's your turn, {turn}. Move to which place?")
+        print("Your moves are from 0-8")
+        move = int(input())
+
+        # Check if the chosen spot is empty
+        if board[move] == ' ':
+            board[move] = turn
+
+            # Check for a win
+            if win(board, turn):
+                print_board()
+                print(f"Congratulations! Player {turn} wins!")
+                break
+
+            count += 1
+            if count == 9:
+                print("It's a tie!")
+                break
+
+            # Switch the player's turn
+            turn = 'O' if turn == 'X' else 'X'
+        else:
+            print("That place is already filled. Move to which place?")
+
+# Start the game
+play_game()
